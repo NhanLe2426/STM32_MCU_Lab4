@@ -22,9 +22,11 @@ uint8_t Error_code_G = 0;
  */
 void SCH_Init(void) {
 	for (uint8_t idx = 0; idx < SCH_MAX_TASKS; idx++) {
-		SCH_Delete_Task(idx);
+		SCH_tasks_G[idx].pTask = 0;
+		SCH_tasks_G[idx].Delay = 0;
+		SCH_tasks_G[idx].Period = 0;
+		SCH_tasks_G[idx].RunMe = 0;
 	}
-
 }
 
 /**
@@ -44,8 +46,8 @@ void SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD) {
 
 	// If there is no space available in the task array (Task list is full)
 	if (index == SCH_MAX_TASKS) {
-		Error_code_G = ERROR_SCH_TOO_MANY_TASKS;	// Set the global error variable
-		return SCH_MAX_TASKS;						// return an error code
+		// Error_code_G = ERROR_SCH_TOO_MANY_TASKS;	// Set the global error variable
+		return;										// return an error code
 	}
 
 	// If there is a space in the task array
@@ -101,7 +103,7 @@ void SCH_Dispatch_Tasks(void) {
 		}
 	}
 	// Report system status
-	SCH_Report_Status();
+	// SCH_Report_Status();
 }
 
 /**
@@ -109,20 +111,21 @@ void SCH_Dispatch_Tasks(void) {
  * @param	taskIndex : the position of the task that need to be removed
  * @retval	None
  */
-uint8_t SCH_Delete_Task(uint8_t taskIndex) {
-	uint8_t Return_code;
+void SCH_Delete_Task(uint32_t taskID) {
 	if (SCH_tasks_G[taskIndex].pTask == 0) {
 		// No task at this location
 		// Set the global error variable
-		Error_code_G = ERROR_SCH_CANNOT_DELETE_TASK;
+		// Error_code_G = ERROR_SCH_CANNOT_DELETE_TASK;
 		// Return an error code
-		Return_code = RETURN_ERROR;
+		// Return_code = RETURN_ERROR;
+		return;
 	} else {
-		Return_code = RETURN_NORMAL;
+		// Return_code = RETURN_NORMAL;
+		return;
 	}
 	SCH_tasks_G[taskIndex].pTask = 0x0000;
 	SCH_tasks_G[taskIndex].Delay = 0;
 	SCH_tasks_G[taskIndex].Period = 0;
 	SCH_tasks_G[taskIndex].RunMe = 0;
-	return Return_code; 		// return status
+	// return Return_code; 		// return status
 }

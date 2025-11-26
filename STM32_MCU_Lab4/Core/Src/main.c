@@ -21,12 +21,13 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "software_timer.h"
-#include "button.h"
+//#include "software_timer.h"
+//#include "button.h"
 #include "global.h"
-#include "fsm_automatic.h"
-#include "fsm_manual.h"
-#include "fsm_config.h"
+//#include "fsm_automatic.h"
+//#include "fsm_manual.h"
+//#include "fsm_config.h"
+#include "scheduler.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,21 +100,18 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  SCH_Add_Task(timerRun, 0, 1);
+  SCH_Add_Task(getKeyInput, 0, 20);
+
+  SCH_Add_Task(FSM_Automatic_Run, 5, 1);
+  SCH_Add_Task(FSM_Manual_Run, 10, 1);
+  SCH_Add_Task(FSM_Config_Run, 20, 1);
   while (1)
   {
-//	  if (isTimerExpired(5) == 1) {
-//		  setTimer(5, 1000);
-//		  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-//	  }
-//	  if (isButtonLongPressed(0) == 1) {
-//		  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-//	  }
-	  FSM_Automatic_Run();
-	  FSM_Manual_Run();
-	  FSM_Config_Run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  SCH_Dispatch_Tasks();
   }
   /* USER CODE END 3 */
 }
@@ -262,11 +260,11 @@ void init_system(void) {
 	setTimer(3, 500);
 	setTimer(4, 1000);
 	setTimer(5, 1000);
+	SCH_Init();
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	timerRun();
-	getKeyInput();
+	SCH_Update();
 }
 /* USER CODE END 4 */
 
