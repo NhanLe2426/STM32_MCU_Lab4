@@ -1,0 +1,3 @@
+../Core/Src/fsm_automatic.c:20:6:initManualMode	1
+../Core/Src/fsm_automatic.c:33:6:initConfigMode	1
+../Core/Src/fsm_automatic.c:46:6:FSM_Automatic_Run	24

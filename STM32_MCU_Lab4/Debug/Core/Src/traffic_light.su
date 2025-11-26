@@ -1,0 +1,5 @@
+../Core/Src/traffic_light.c:21:6:setLightWay1	24	static
+../Core/Src/traffic_light.c:32:6:setLightWay2	24	static
+../Core/Src/traffic_light.c:43:6:setAllRedLED	16	static
+../Core/Src/traffic_light.c:65:6:setAllYellowLED	16	static
+../Core/Src/traffic_light.c:87:6:setAllGreenLED	16	static

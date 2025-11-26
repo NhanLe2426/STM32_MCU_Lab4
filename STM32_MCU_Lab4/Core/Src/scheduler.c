@@ -112,7 +112,7 @@ void SCH_Dispatch_Tasks(void) {
  * @retval	None
  */
 void SCH_Delete_Task(uint32_t taskID) {
-	if (SCH_tasks_G[taskIndex].pTask == 0) {
+	if (SCH_tasks_G[taskID].pTask == 0) {
 		// No task at this location
 		// Set the global error variable
 		// Error_code_G = ERROR_SCH_CANNOT_DELETE_TASK;
@@ -123,9 +123,9 @@ void SCH_Delete_Task(uint32_t taskID) {
 		// Return_code = RETURN_NORMAL;
 		return;
 	}
-	SCH_tasks_G[taskIndex].pTask = 0x0000;
-	SCH_tasks_G[taskIndex].Delay = 0;
-	SCH_tasks_G[taskIndex].Period = 0;
-	SCH_tasks_G[taskIndex].RunMe = 0;
+	SCH_tasks_G[taskID].pTask = 0x0000;
+	SCH_tasks_G[taskID].Delay = 0;
+	SCH_tasks_G[taskID].Period = 0;
+	SCH_tasks_G[taskID].RunMe = 0;
 	// return Return_code; 		// return status
 }

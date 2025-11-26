@@ -24,6 +24,7 @@ typedef struct {
 /* Define */
 #define SCH_MAX_TASKS	40
 #define NO_TASK_ID		0
+#define TICKS			10
 
 /* Variables */
 

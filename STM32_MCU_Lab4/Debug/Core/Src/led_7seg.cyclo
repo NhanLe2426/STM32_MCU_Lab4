@@ -1,0 +1,4 @@
+../Core/Src/led_7seg.c:21:6:display7SEG	11
+../Core/Src/led_7seg.c:149:6:clear7SEG	1
+../Core/Src/led_7seg.c:164:6:update7SEG	5
+../Core/Src/led_7seg.c:217:6:updateLedBuffer	2
