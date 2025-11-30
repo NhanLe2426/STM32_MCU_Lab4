@@ -51,9 +51,20 @@ void SCH_Add_Task(void (*pFunction)(), uint32_t DELAY, uint32_t PERIOD) {
 	}
 
 	// If there is a space in the task array
+	uint32_t delay_to_ticks = DELAY / TICKS;
+	uint32_t period_to_ticks = PERIOD / TICKS;
+
 	SCH_tasks_G[index].pTask = pFunction;
-	SCH_tasks_G[index].Delay = DELAY;
-	SCH_tasks_G[index].Period = PERIOD;
+	if (delay_to_ticks == 0) {
+		SCH_tasks_G[index].Delay = 1;
+	} else {
+		SCH_tasks_G[index].Delay = delay_to_ticks;
+	}
+	if (period_to_ticks == 0) {
+		SCH_tasks_G[index].Period = 1;
+	} else {
+		SCH_tasks_G[index].Period = period_to_ticks;
+	}
 	SCH_tasks_G[index].RunMe = 0;
 	// Return the position of the task (for deletion later)
 	// return index

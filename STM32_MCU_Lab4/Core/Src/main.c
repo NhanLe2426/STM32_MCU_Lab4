@@ -105,9 +105,9 @@ int main(void)
   SCH_Add_Task(getKeyInput, 0, 1);
   SCH_Add_Task(LED_Toggle_Test, 0, 500);
 
-  SCH_Add_Task(FSM_Automatic_Run, 5, 1);
-  SCH_Add_Task(FSM_Manual_Run, 10, 1);
-  SCH_Add_Task(FSM_Config_Run, 20, 1);
+  SCH_Add_Task(FSM_Automatic_Run, 500, 1);
+  SCH_Add_Task(FSM_Manual_Run, 1000, 1);
+  SCH_Add_Task(FSM_Config_Run, 3000, 1);
   while (1)
   {
     /* USER CODE END WHILE */
